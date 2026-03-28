@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
-const userModel = require("../models/user.model");
+const captainModel = require("../models/captain.model");
 const blacklistModel = require("../models/blacklist.model");
 
-module.exports.userAuth = async (req, res, next) => {
+module.exports.captainAuth = async (req, res, next) => {
   try {
     const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
     if (!token) {
@@ -14,11 +14,11 @@ module.exports.userAuth = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await userModel.findById(decoded.id);
-    if (!user) {
+    const captain = await captainModel.findById(decoded.id);
+    if (!captain) {
       return res.status(401).json({ message: "Invalid token" });
     }
-    req.user = user;
+    req.captain = captain;
     next();
   } catch (error) {
     console.error("Authentication error:", error);
