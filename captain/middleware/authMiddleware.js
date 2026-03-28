@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const captainModel = require("../models/captain.model");
-const blacklistModel = require("../models/blacklist.model");
+const blacklistModel = require("../models/blacklisttoken.model");
 
 module.exports.captainAuth = async (req, res, next) => {
   try {
